@@ -1,0 +1,10 @@
+html{
+    --nunshadda-color: rgb(243, 43, 43);
+}
+
+
+.nunshadda{
+    color: var(--nunshadda-color);
+}
+
+

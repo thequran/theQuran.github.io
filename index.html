@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Holy Quran</title>
+
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./fontawesome/css/all.css" />
+    <link rel="stylesheet" href="quran_header.css" />
+    <link rel="stylesheet" href="quran.css" />
+    <link rel="stylesheet" href="tajweed.css" />
+    <link rel="stylesheet" href="quran-header-settings.css">
+
+    <!-- required to load all functions at startup -->
+    <script src="./functions.js"></script>
+    <script src="./themes.js"></script>
+    <script src="./tajweed.js"></script>
+
+    <script id="wpcp_disable_selection" type="text/javascript">
+        var image_save_msg = "You are not allowed to save images!";
+        var no_menu_msg = "Context Menu disabled!";
+        var smessage = "Content is protected !!";
+
+        function disableEnterKey(e) {
+            var elemtype = e.target.tagName;
+
+            elemtype = elemtype.toUpperCase();
+
+            if (
+                elemtype == "TEXT" ||
+                elemtype == "TEXTAREA" ||
+                elemtype == "INPUT" ||
+                elemtype == "PASSWORD" ||
+                elemtype == "SELECT" ||
+                elemtype == "OPTION" ||
+                elemtype == "EMBED"
+            ) {
+                elemtype = "TEXT";
+            }
+
+            if (e.ctrlKey) {
+                var key;
+                if (window.event) key = window.event.keyCode;
+                //IE
+                else key = e.which; //firefox (97)
+
+                //if (key != 17) alert(key);
+                if (
+                    elemtype != "TEXT" &&
+                    (key == 123 ||
+                        key == 97 ||
+                        key == 65 ||
+                        key == 67 ||
+                        key == 99 ||
+                        key == 88 ||
+                        key == 120 ||
+                        key == 26 ||
+                        key == 85 ||
+                        key == 86 ||
+                        key == 83 ||
+                        key == 43 ||
+                        key == 73)
+                ) {
+                    if (wccp_free_iscontenteditable(e)) return true;
+                    //show_wpcp_message('You are not allowed to copy content or view source');
+                    return false;
+                } else return true;
+            }
+        }
+
+        /*For contenteditable tags*/
+        function wccp_free_iscontenteditable(e) {
+            var e = e || window.event; // also there is no e.target property in IE. instead IE uses window.event.srcElement
+
+            var target = e.target || e.srcElement;
+
+            var elemtype = e.target.nodeName;
+
+            elemtype = elemtype.toUpperCase();
+
+            var iscontenteditable = "false";
+
+            if (typeof target.getAttribute != "undefined")
+                iscontenteditable = target.getAttribute("contenteditable"); // Return true or false as string
+
+            var iscontenteditable2 = false;
+
+            if (typeof target.isContentEditable != "undefined")
+                iscontenteditable2 = target.isContentEditable; // Return true or false as boolean
+
+            if (target.parentElement.isContentEditable) iscontenteditable2 = true;
+
+            if (iscontenteditable == "true" || iscontenteditable2 == true) {
+                if (typeof target.style != "undefined") target.style.cursor = "text";
+
+                return true;
+            }
+        }
+
+        ////////////////////////////////////
+        function disable_copy(e) {
+            var e = e || window.event; // also there is no e.target property in IE. instead IE uses window.event.srcElement
+
+            var elemtype = e.target.tagName;
+
+            elemtype = elemtype.toUpperCase();
+
+            if (
+                elemtype == "TEXT" ||
+                elemtype == "TEXTAREA" ||
+                elemtype == "INPUT" ||
+                elemtype == "PASSWORD" ||
+                elemtype == "SELECT" ||
+                elemtype == "OPTION" ||
+                elemtype == "EMBED"
+            ) {
+                elemtype = "TEXT";
+            }
+
+            if (wccp_free_iscontenteditable(e)) return true;
+
+            var isSafari =
+                /Safari/.test(navigator.userAgent) &&
+                /Apple Computer/.test(navigator.vendor);
+
+            var checker_IMG = "";
+            if (elemtype == "IMG" && checker_IMG == "checked" && e.detail >= 2) {
+                show_wpcp_message(alertMsg_IMG);
+                return false;
+            }
+            if (elemtype != "TEXT") {
+                if (smessage !== "" && e.detail == 2)
+                    if (isSafari)
+                        //  show_wpcp_message(smessage);
+
+                        return true;
+                    else return false;
+            }
+        }
+
+        //////////////////////////////////////////
+        function disable_copy_ie() {
+            var e = e || window.event;
+            var elemtype = window.event.srcElement.nodeName;
+            elemtype = elemtype.toUpperCase();
+            if (wccp_free_iscontenteditable(e)) return true;
+            if (elemtype == "IMG") {
+                //show_wpcp_message(alertMsg_IMG);
+                return false;
+            }
+            if (
+                elemtype != "TEXT" &&
+                elemtype != "TEXTAREA" &&
+                elemtype != "INPUT" &&
+                elemtype != "PASSWORD" &&
+                elemtype != "SELECT" &&
+                elemtype != "OPTION" &&
+                elemtype != "EMBED"
+            ) {
+                return false;
+            }
+        }
+        function reEnable() {
+            return true;
+        }
+        document.onkeydown = disableEnterKey;
+        document.onselectstart = disable_copy_ie;
+        if (navigator.userAgent.indexOf("MSIE") == -1) {
+            document.onmousedown = disable_copy;
+            document.onclick = reEnable;
+        }
+        function disableSelection(target) {
+            //For IE This code will work
+            if (typeof target.onselectstart != "undefined")
+                target.onselectstart = disable_copy_ie;
+            //For Firefox This code will work
+            else if (typeof target.style.MozUserSelect != "undefined") {
+                target.style.MozUserSelect = "none";
+            }
+
+            //All other  (ie: Opera) This code will work
+            else
+                target.onmousedown = function () {
+                    return false;
+                };
+            target.style.cursor = "default";
+        }
+        //Calling the JS function directly just after body load
+        window.onload = function () {
+            disableSelection(document.body);
+        };
+
+        //////////////////special for safari Start////////////////
+        var onlongtouch;
+        var timer;
+        var touchduration = 1000; //length of time we want the user to touch before we do something
+
+        var elemtype = "";
+        function touchstart(e) {
+            var e = e || window.event;
+            // also there is no e.target property in IE.
+            // instead IE uses window.event.srcElement
+            var target = e.target || e.srcElement;
+
+            elemtype = window.event.srcElement.nodeName;
+
+            elemtype = elemtype.toUpperCase();
+
+            if (!wccp_pro_is_passive()) e.preventDefault();
+            if (!timer) {
+                timer = setTimeout(onlongtouch, touchduration);
+            }
+        }
+
+        function touchend() {
+            //stops short touches from firing the event
+            if (timer) {
+                clearTimeout(timer);
+                timer = null;
+            }
+            onlongtouch();
+        }
+
+        onlongtouch = function (e) {
+            //this will clear the current selection if anything selected
+
+            if (
+                elemtype != "TEXT" &&
+                elemtype != "TEXTAREA" &&
+                elemtype != "INPUT" &&
+                elemtype != "PASSWORD" &&
+                elemtype != "SELECT" &&
+                elemtype != "EMBED" &&
+                elemtype != "OPTION"
+            ) {
+                if (window.getSelection) {
+                    if (window.getSelection().empty) {
+                        // Chrome
+                        window.getSelection().empty();
+                    } else if (window.getSelection().removeAllRanges) {
+                        // Firefox
+                        window.getSelection().removeAllRanges();
+                    }
+                } else if (document.selection) {
+                    // IE?
+                    document.selection.empty();
+                }
+                return false;
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            window.addEventListener("touchstart", touchstart, false);
+            window.addEventListener("touchend", touchend, false);
+        });
+
+        function wccp_pro_is_passive() {
+            var cold = false,
+                hike = function () { };
+
+            try {
+                const object1 = {};
+                var aid = Object.defineProperty(object1, "passive", {
+                    get() {
+                        cold = true;
+                    },
+                });
+                window.addEventListener("test", hike, aid);
+                window.removeEventListener("test", hike, aid);
+            } catch (e) { }
+
+            return cold;
+        }
+      /*special for safari End*/
+    </script>
+    <script>
+        document.ondragstart = function () {
+            return false;
+        };
+        document.oncontextmenu = function (e) {
+            return false;
+        };
+    </script>
+</head>
+
+<body>
+    <!-- preloader start-->
+    <div class="loader-bg" id="loader-bg">
+        <div class="loader"></div>
+    </div>
+
+    <!-- preloader end-->
+
+    <div class="main-bg">
+        <!-- main header start here -->
+
+        <div class="header-wrapper main-content">
+            <div class="container">
+                <div class="main-header">
+                    <div class="left-header-wrapper">
+                        <input type="checkbox" id="surahs-checkbox" />
+
+                        <label for="surahs-checkbox">
+                            <div class="
+                    singleSurahNameWrap
+                    half-round
+                    hide-me
+                    main-bg main-text-2
+                  " id="surahs-open">
+                                <div class="angleArrow">
+                                    <i class="fa fa-angle-right"></i>
+                                </div>
+                                <div class="surahNameAndTrnslt">
+                                    <font id="single_surah_title"></font>
+                                    <br />
+                                    <font id="signleSurahTr"></font>
+                                </div>
+                            </div>
+
+                            <i class="fa fa-times main-content main-text-2" id="surahs-close"></i>
+                        </label>
+
+                        <!-- left side bar start here -->
+                        <div id="left-sidebar" class="left-sidebar main-bg">
+                            <div style="
+                    margin-right: 10px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: flex-end;
+                    justify-content: flex-end;
+                  ">
+                                <h4 class="main-text-2 right"><b>Holy Quran</b></h4>
+                            </div>
+
+                            <!-- surah list goes here -->
+
+                            <div class="leftSurahScroller">
+                                <div id="leftSidebarSurahList"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- left header wrapper end -->
+
+                    <div class="right-header-wrapper">
+                        <input type="checkbox"  id="setting-checkbox" />
+
+                        <label for="setting-checkbox">
+                            <i class="fa fa-cog main-bg main-text-2" id="setting-open"></i>
+                            <i class="fa fa-times main-content main-text-2" id="setting-close"></i>
+                        </label>
+
+                        <!-- right side bar start here -->
+                        <div id="right-sidebar" class="right-sidebar main-bg">
+                            <h4 class="main-text-2"><b>Settings</b></h4>
+                            <br />
+
+                            <div style="
+                            height: 100%;
+                            overflow:scroll;
+                            ">
+                                <ul></ul>
+                                <li id="themes">
+                                    <a href="#themes" class="main-text-2">Themes</a>
+                                </li>
+                                <div id="forTheme" class="forTheme">
+                                    <!-- Themes Button will be listed here.... -->
+                                </div>
+                                <div id="forTajweed">
+                                    <input type="checkbox" id="tajweed-checkbox" checked />
+
+                                    <label for="tajweed-checkbox" style="width: 100%; cursor: pointer; ">
+                                        <div style="
+                          color: var(--main-text);
+                          width: 100%;
+                          display: flex;
+                          flex-direction: row;
+                          justify-content: space-between;
+                        ">
+                                            <b>Show Tajweed Color</b>
+
+                                            <div style="right: auto;
+                                            display: flex;
+                                            flex-direction: column;">
+                                                <i id="tajweed-show" class="fa fa-check" style="
+                            border: 1px solid var(--main-content);
+                            border-radius: 4px;
+                            padding: 4px;
+                            font-size: 12px;
+                            background-color: var(--main-text);
+                            color: var(--main-content);
+                          ">
+                                                </i>
+                                                <i id="tajweed-hide" class="fa fa-check" style="
+                                                                            border: 1px solid var(--main-content);
+                                                                            border-radius: 4px;
+                                                                            padding: 4px;
+                                                                            font-size: 12px;
+                                                                            background-color: var(--main-text);
+                                                                            color: var(--main-text);
+                                                                            
+                                                                          "></i>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <h4 style="width: 100%; text-align: center" class="main-text-2">
+                                    PREVIEW
+                                </h4>
+
+                                <p class="main-text arabic" style="font-family: var(--arabic-font)">
+                                    بِسۡمِ اللهِ الرَّحۡمٰنِ الرَّحِيۡمِ وَاٰيَةٌ لَّهُمُ
+                                    الۡاَرۡضُ الۡمَيۡتَةُ ۖۚ اَحۡيَيۡنٰهَا وَاَخۡرَجۡنَا مِنۡهَا
+                                    حَبًّا فَمِنۡهُ يَاۡكُلُوۡن
+                                </p>
+
+                                <li id="fonts">
+                                    <a href="#fonts" class="main-text-2">Fonts</a>
+                                </li>
+
+                                <div>
+                                    <input type="checkbox" id="font-arabic-checkbox" />
+
+                                    <label style="width: 100%; height: max-content; padding: 0; cursor: pointer"
+                                        for="font-arabic-checkbox">
+                                        <div class="main-text" id="font-arabic-open">
+                                            <div style="
+                            display: flex;
+                            flex-direction: row;
+
+                            height: 100%;
+                          ">
+                                                <div style="display: flex; padding: 8px">
+                                                    <b style="
+                                font-size: 18px;
+                                padding: 8px;
+                                text-align: center;
+                              ">أ</b>
+                                                </div>
+
+                                                <div style="
+                              display: flex;
+                              flex-direction: column;
+                              align-items: flex-start;
+                              justify-content: center;
+                            ">
+                                                    <b>ARABIC</b>
+                                                    <font>Script, Font and Style</font>
+                                                </div>
+                                            </div>
+                                            <i class="fa fa-angle-up"></i>
+                                        </div>
+
+                                        <div class="main-text" id="font-arabic-close">
+                                            <div style="
+                            display: flex;
+                            flex-direction: row;
+
+                            height: 100%;
+                          ">
+                                                <div style="display: flex; padding: 8px">
+                                                    <b style="
+                                font-size: 18px;
+                                padding: 8px;
+                                text-align: center;
+                              ">أ</b>
+                                                </div>
+
+                                                <div style="
+                              display: flex;
+                              flex-direction: column;
+                              align-items: flex-start;
+                              justify-content: center;
+                            ">
+                                                    <b>ARABIC</b>
+                                                    <font>Script, Font and Style</font>
+                                                </div>
+                                            </div>
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>
+                                    </label>
+
+                                    <div id="font-arabic-options" class="column">
+
+
+                                        <b class="main-text-2">Script</b>
+
+                                        <div class="row horizontal-scroll"
+                                            style="justify-items: start; justify-content: space-between; align-content:space-between;overflow-y: scroll;width: 100%; margin:auto; padding: auto;">
+
+                                            <div class="row m4">
+
+                                                <input class="none" type="radio" name="script" id="radio-imlaei">
+
+                                                <label for="radio-imlaei" class="main-text p8">
+                                                    <div id="imlaei-checked" class="row center chip">
+                                                        <i class="fa fa-check"></i>
+
+                                                        <b class="p8">Imlaei</b>
+                                                    </div>
+                                                    <div id="imlaei-uncheck" class="row center chip">
+                                                        <b class="p8">Imlaei</b>
+                                                    </div>
+                                                </label>
+
+                                            </div>
+
+                                            <div class="row m4">
+
+                                                <input class="none" type="radio" name="script" id="radio-indopak">
+
+                                                <label for="radio-indopak" class="main-text p8">
+                                                    <div id="indopak-checked" class="row center chip">
+                                                        <i class="fa fa-check"></i>
+                                                        <b class="p8">Indopak</b>
+                                                    </div>
+                                                    <div id="indopak-uncheck" class="row center chip">
+                                                        <b class="p8">Indopak</b>
+                                                    </div>
+                                                </label>
+
+                                            </div>
+
+                                            <div class="row m4">
+
+                                                <input class="none" type="radio" name="script" id="radio-uthmani">
+
+                                                <label for="radio-uthmani" class="main-text p8">
+                                                    <div id="uthmani-checked" class="row center chip">
+                                                        <i class="fa fa-check"></i>
+                                                        <b class="p8">Uthmani</b>
+                                                    </div>
+                                                    <div id="uthmani-uncheck" class="row center chip">
+                                                        <b class="p8">Uthmani</b>
+                                                    </div>
+                                                </label>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                </div>
+
+
+
+
+
+
+
+                                <!-- menu font arabic end here -->
+
+
+
+
+                                <div>
+                                    <input type="checkbox" id="font-translation-checkbox" />
+
+                                    <label style="width: 100%; cursor: pointer" for="font-translation-checkbox">
+                                        <div class="main-text" id="font-translation-open">
+                                            <div style="
+                            display: flex;
+                            flex-direction: row;
+
+                            height: 100%;
+                          ">
+                                                <div style="display: flex; padding: 8px">
+                                                    <b style="
+                                font-size: 18px;
+                                padding: 8px;
+                                text-align: center;
+                              ">A</b>
+                                                </div>
+
+                                                <div style="
+                              display: flex;
+                              flex-direction: column;
+                              align-items: flex-start;
+                              justify-content: center;
+                            ">
+                                                    <b>TRANSLATION</b>
+                                                    <font>Font and Style</font>
+                                                </div>
+                                            </div>
+                                            <i class="fa fa-angle-up"></i>
+                                        </div>
+
+                                        <div class="main-text" id="font-translation-close">
+                                            <div style="
+                            display: flex;
+                            flex-direction: row;
+                            height: 100%;
+                          ">
+                                                <div style="display: flex; padding: 8px">
+                                                    <b style="
+                                font-size: 18px;
+                                padding: 8px;
+                                text-align: center;
+                              ">A</b>
+                                                </div>
+
+                                                <div style="
+                              display: flex;
+                              flex-direction: column;
+                              align-items: flex-start;
+                              justify-content: center;
+                            ">
+                                                    <b>TRANSLATION</b>
+                                                    <font>Font and Style</font>
+                                                </div>
+                                            </div>
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <li id="languages">
+                                    <a class="main-text-2" href="#languages">Languages And Translations</a>
+                                </li>
+
+
+                                <div class="main-text" id="lang-trans-language" style="
+                      display: flex;
+                      flex-direction: row;
+                      align-items: center;
+                      height: max-content;
+                      justify-content: left;
+                    ">
+                                    <div style="
+                        display: flex;
+                        flex-direction: row;
+
+                        height: 100%;
+                      ">
+                                        <div style="display: flex; padding: 8px">
+                                            <b style="
+                            font-size: 18px;
+                            padding: 8px;
+                            text-align: center;
+                          "><i class="fa fa-"></i></b>
+                                        </div>
+
+                                        <div style="
+                          display: flex;
+                          flex-direction: column;
+                          align-items: flex-start;
+                          justify-content: center;
+                        ">
+                                            <b>Main Language</b>
+                                            <p>English</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="main-text" id="lang-trans-translation" style="
+                      display: flex;
+                      flex-direction: row;
+                      align-items: center;
+                      height: max-content;
+                      justify-content: left;
+                    ">
+                                    <div style="
+                        display: flex;
+                        flex-direction: row;
+
+                        height: 100%;
+                      ">
+                                        <div style="display: flex; padding: 8px">
+                                            <b style="
+                            font-size: 18px;
+                            padding: 8px;
+                            text-align: center;
+                          "><i class="fa fa-"></i></b>
+                                        </div>
+
+                                        <div style="
+                          display: flex;
+                          flex-direction: column;
+                          align-items: flex-start;
+                          justify-content: center;
+                        ">
+                                            <b>Translation</b>
+                                            <p>Translation for Quran</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- right side bar stop here -->
+                </div>
+                <!-- side bar stop here -->
+            </div>
+        </div>
+        <!-- main header stop here -->
+
+        <div class="container">
+            <div id="wpcp-error-message" class="msgmsg-box-wpcp warning-wpcp hideme">
+                <span>Alert: </span>Content is protected !!
+            </div>
+            <script>
+                var timeout_result;
+                function show_wpcp_message(smessage) {
+                    if (smessage !== "") {
+                        var smessage_text = "<span>Alert: </span>" + smessage;
+                        document.getElementById("wpcp-error-message").innerHTML =
+                            smessage_text;
+                        document.getElementById("wpcp-error-message").className =
+                            "msgmsg-box-wpcp warning-wpcp showme";
+                        clearTimeout(timeout_result);
+                        timeout_result = setTimeout(hide_message, 3000);
+                    }
+                }
+                function hide_message() {
+                    document.getElementById("wpcp-error-message").className =
+                        "msgmsg-box-wpcp warning-wpcp hideme";
+                }
+            </script>
+
+            <h1 class="text-center main-text-2">Bismillahir Rahmanir Rahim</h1>
+
+            <div id="quran_list" class="whole-item-wraper">
+                <!-- Surah or Ayah will be listed here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- for context menu -->
+    <div id="ayah-context-menu">
+        <font>The Opening</font>
+        <font id="fxx">Surah No: <b id="ctx-surah-count">1</b>, Ayah No:
+            <b id="ctx-ayah-count">1</b>
+        </font>
+        <ul>
+            <li id="ctx-menu-play">
+                <i class="fa fa-play"></i><b>Play This Ayah</b>
+            </li>
+
+            <li id="ctx-menu-tafseer">
+                <i class="fa fa-sms"></i><b>See Tafseer</b>
+            </li>
+
+            <li id="ctx-menu-pin"><i class="fa fa-thumbtack"></i><b>Pin</b></li>
+
+            <li id="ctx-menu-bookmark">
+                <i class="fa fa-bookmark"></i><b>Bookmark</b>
+            </li>
+
+            <li id="ctx-menu-copy"><i class="fa fa-copy"></i><b>Copy Ayah</b></li>
+
+            <li id="ctx-menu-share">
+                <i class="fa fa-share"></i><b>Share Ayah</b>
+            </li>
+        </ul>
+        <b id="cancel">CANCEL</b>
+    </div>
+
+    <script src="qran.js"></script>
+    <script src="./bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

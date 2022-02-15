@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #ayah-context-menu ul {
+            list-style-type: none;
+            text-align: start;
+            justify-content: start;
+            align-content: flex-start;
+            padding: 0;
+        }
+
+        #ayah-context-menu ul li {
+            text-align: start;
+            padding: 4px 56px 4px 12px;
+            margin: 1px;
+
+        }
+
+        #ayah-context-menu ul li:hover {
+            background-color: rgb(145, 145, 145);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        #ayah-context-menu #cancel {
+            text-align: end;
+            align-content: flex-end;
+            justify-content: flex-end;
+            align-self: flex-end;
+            width: fit-content;
+            padding: 4px 12px;
+            font-size: 12px;
+            
+
+        }
+        #ayah-context-menu #cancel:hover {
+            text-align: end;
+            font-size: 14px;
+            background-color: grey;
+            cursor: pointer;
+
+        }
+        #ayah-context-menu{
+            display: flex;
+            flex-direction: column;
+            width: max-content;
+
+            border: 1px solid black;
+            border-radius: 4px;
+            
+        }
+        #ayah-context-menu font{
+            font-weight: bold;
+            font-size: large;
+            text-align: center;
+        }
+        #ayah-context-menu #fxx{
+            font-size: small;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="ayah-context-menu">
+        <font id="ctx-sura-name">The Opening</font>
+        <font id="fxx">Surah No: <b id="ctx-surah-count">1</b>, Ayah No: <b id="ctx-ayah-count">1</b></font>
+        <ul>
+            <li id="ctx-menu-play"><i class="fa-solid fa-play"></i><b>Play This Ayah</b></li>
+
+            <li id="ctx-menu-tafseer"><i class="fa-solid fa-message-captions"></i><b>See Tafseer</b></li>
+
+            <li id="ctx-menu-pin"><i class="fa-solid fa-thumbtack"></i><b>Pin</b></li>
+
+            <li id="ctx-menu-bookmark"><i class="fa-solid fa-book-bookmark"></i><b>Bookmark</b></li>
+
+            <li id="ctx-menu-copy"><i class="fa-solid fa-copy"></i><b>Copy Ayah</b></li>
+
+            <li id="ctx-menu-share"><i class="fa-duotone fa-share-nodes"></i><b>Share Ayah</b></li>
+
+        </ul>
+        <b id="cancel">CANCEL</b>
+    </div>
+
+</body>
+
+</html>

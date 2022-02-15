@@ -1,0 +1,304 @@
+@font-face {
+  font-family: noorehidayat;
+  src: url("fonts/arabic/noorehidayat.ttf");
+}
+@font-face {
+  font-family: al_qalam_quran_majed;
+  src: url("fonts/arabic/al_qalam_quran_majed.ttf");
+  
+}
+@font-face {
+  font-family: ar_othmani;
+  src: url("fonts/arabic/ar_othmani.ttf");
+}
+
+@font-face {
+  font-family: excelent_arabic_web;
+  src: url("fonts/arabic/excelent_arabic_web.ttf");
+}
+
+@font-face {
+  font-family: kitab;
+  src: url("fonts/arabic/kitab.ttf");
+}
+
+@font-face {
+  font-family: noorehuda;
+  src: url("fonts/arabic/noorehuda.ttf");
+}
+
+@font-face {
+  font-family: noorehira;
+  src: url("fonts/arabic/noorehira.ttf");
+}
+
+html {
+  --main-bg: rgb(1, 39, 62);
+  --main-content: #195f70;
+  --main-text: white;
+  --main-text-2: rgb(122, 218, 235);
+
+  --arabic-font: kitab;
+  --arabic-font-size: 20px;
+  --arabic-font-style: normal;
+  --arabic-font-weight: normal;
+
+}
+
+.arabic {
+  font-family: var(--arabic-font);
+  font-size: var(--arabic-font-size);
+  font-weight: var(--arabic-font-weight);
+  font-style: var(--arabic-font-style);
+  direction: rtl;
+
+
+}
+
+.main-bg {
+  background-color: var(--main-bg);
+}
+.main-content {
+  background-color: var(--main-content);
+}
+.main-text {
+  color: var(--main-text);
+}
+.main-text-2 {
+  color: var(--main-text-2);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 16px;
+  background: var(--main-content);
+  cursor: grabbing;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: var(--main-bg);
+  cursor: grabbing;
+}
+
+li {
+  list-style-type: none;
+}
+a:hover {
+  text-decoration: none;
+}
+
+.round {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 14px;
+  margin-left: -12px;
+}
+
+/* botstrap design er code */
+.items-wrapper {
+  padding: 10px 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.inner-item {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  text-align: center;
+  justify-content: space-between;
+}
+#btnTh {
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.inner-item div.title-wrapper {
+  display: flex;
+}
+
+.inner-item div {
+  padding-left: 8px;
+  text-align: start;
+}
+
+.inner-item img {
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  align-self: center;
+}
+
+#wpcp-error-message {
+  direction: ltr;
+  text-align: center;
+  transition: opacity 0.9s ease 0s;
+  z-index: 99999999;
+}
+.warning-wpcp {
+  background: #ffecec
+    url(https://agrobd24.com/wp-content/plugins/wp-content-copy-protector/images/warning.png)
+    no-repeat 10px 50%;
+}
+.msgmsg-box-wpcp {
+  border: 1px solid #f5aca6;
+  border-radius: 10px;
+  color: #555;
+  font-family: Tahoma;
+  font-size: 11px;
+  margin: 10px;
+  padding: 10px 36px;
+  position: fixed;
+  width: 255px;
+  top: 50%;
+  left: 50%;
+  margin-top: -10px;
+  margin-left: -130px;
+  -webkit-box-shadow: 0 0 34px 2px #f2bfbf;
+  -moz-box-shadow: 0 0 34px 2px #f2bfbf;
+  box-shadow: 0 0 34px 2px #f2bfbf;
+}
+.hideme {
+  opacity: 0;
+  visibility: hidden;
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.unselectable {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+/*--------for Preloader star------*/
+
+.loader-bg {
+  background: var(--main-bg);
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 9999999;
+  visibility: hidden;
+}
+/* 
+.loader-bg .loader_active{
+  visibility: visible;
+} */
+
+.loader {
+  border: 0px solid transparent;
+  height: 170px;
+  width: 170px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loader::before,
+.loader::after {
+  content: "";
+  border: 10px solid var(--main-content);
+  border-radius: 50%;
+  width: inherit;
+  height: inherit;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  animation: loader 2s linear infinite;
+  opacity: 0;
+}
+
+.loader::before {
+  animation-delay: 0.5s;
+}
+
+/* context menu style start here */
+
+#ayah-context-menu {
+  z-index: 9999;
+  padding: 8px;
+  transition: 0ms;
+  position: fixed;
+  display: flex;
+  visibility: hidden;
+  flex-direction: column;
+  width: max-content;
+  border: 1px solid var(--main-content);
+  background-color: var(--main-bg);
+  color: var(--main-text);
+  border-radius: 8px;
+}
+#ayah-context-menu ul {
+  list-style-type: none;
+  text-align: start;
+  justify-content: start;
+  align-content: flex-start;
+  padding: 0;
+}
+
+#ayah-context-menu ul li {
+  text-align: start;
+  left: 0;
+  border: 1px solid var(--main-bg);
+  padding: 6px 100px 6px 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  margin: 1px;
+}
+
+#ayah-context-menu ul li i {
+  font-size: 16px;
+  padding: 0px 8px;
+}
+#ayah-context-menu ul li:hover {
+  background-color: var(--main-content);
+  color: var(--main-bg);
+  border: 1px solid var(--main-text-2);
+  cursor: pointer;
+  user-select: none;
+  border-radius: 8px;
+}
+
+#ayah-context-menu #cancel {
+  text-align: end;
+  align-content: flex-end;
+  justify-content: flex-end;
+  align-self: flex-end;
+  width: fit-content;
+  padding: 8px 12px;
+  border: 1px solid var(--main-bg);
+  color: var(--main-text);
+  font-size: 12px;
+}
+#ayah-context-menu #cancel:hover {
+  text-align: end;
+  background-color: var(--main-content);
+  color: var(--main-bg);
+  border: 1px solid var(--main-text-2);
+  border-radius: 8px;
+  cursor: pointer;
+}
+#ayah-context-menu font {
+  font-weight: bold;
+  font-size: large;
+  text-align: center;
+}
+#ayah-context-menu #fxx {
+  font-size: small;
+  text-align: center;
+  padding: 16px;
+  color: var(--main-text-2);
+}
+
+/* context menu style end here  */

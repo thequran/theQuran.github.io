@@ -1,0 +1,418 @@
+* {
+  transition-duration: 0.5s;
+}
+
+.header-wrapper {
+  z-index: 5;
+  border-bottom: 2px solid var(--main-bg);
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 0;
+}
+
+.main-header {
+  padding: 8px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* side bar work start from here */
+
+.left-sidebar {
+  height: 100%;
+  top: 0;
+  left: -500px;
+  width: 500px;
+  position: fixed;
+  z-index: 5;
+  transition-duration: 0.5s;
+  padding-right: 8px;
+  font-weight: bold;
+  height: 100%;
+  border-radius: 0 20px 0 0;
+  border: 1px solid var(--main-content);
+  /* overflow-y: scroll;
+  bottom: 0; */
+}
+
+.right-sidebar {
+  height: 100%;
+  top: 0;
+  right: -500px;
+  width: 500px;
+  position: fixed;
+  z-index: 5;
+  transition-duration: 0.5s;
+  padding: 16px;
+  font-weight: bold;
+  height: 100%;
+  border-radius: 20px 0 0 0;
+  border: 1px solid var(--main-content);
+}
+
+@media screen and (max-width: 980px) {
+  .right-sidebar {
+    width: 50vw;
+    right: -50vw;
+    height: 100%;
+    position: fixed;
+    z-index: 5;
+    transition-duration: 0.5s;
+    padding: 16px;
+    font-weight: bold;
+    height: 100%;
+  }
+
+  .left-sidebar {
+    width: 50vw;
+    left: -50vw;
+    height: 100%;
+    position: fixed;
+    z-index: 5;
+    transition-duration: 0.5s;
+    padding: 16px;
+    font-weight: bold;
+    height: 100%;
+  }
+}
+@media screen and (max-width: 760px) {
+  .right-sidebar {
+    width: 70vw;
+    right: -70vw;
+    height: 100%;
+    position: fixed;
+    z-index: 5;
+    transition-duration: 0.5s;
+    padding: 16px;
+    font-weight: bold;
+    height: 100%;
+  }
+  .left-sidebar {
+    width: 70vw;
+    left: -70vw;
+    height: 100%;
+    position: fixed;
+    z-index: 5;
+    transition-duration: 0.5s;
+    padding: 16px;
+    font-weight: bold;
+    height: 100%;
+  }
+}
+@media screen and (max-width: 640px) {
+  .right-sidebar {
+    width: 80vw;
+    right: -80vw;
+    height: 100%;
+    position: fixed;
+    z-index: 5;
+    transition-duration: 0.5s;
+    padding: 16px;
+    font-weight: bold;
+    height: 100%;
+  }
+  .left-sidebar {
+    width: 80vw;
+    left: -80vw;
+    height: 100%;
+    position: fixed;
+    z-index: 5;
+    transition-duration: 0.5s;
+    padding: 16px;
+    font-weight: bold;
+    height: 100%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .right-sidebar {
+    width: 90vw;
+    right: -90vw;
+    height: 100%;
+    position: fixed;
+    z-index: 5;
+    transition-duration: 0.5s;
+    padding: 16px;
+    font-weight: bold;
+    height: 100%;
+  }
+  .left-sidebar {
+    width: 90vw;
+    left: -90vw;
+    height: 100%;
+    position: fixed;
+    z-index: 5;
+    transition-duration: 0.5s;
+    padding: 16px;
+    font-weight: bold;
+    height: 100%;
+  }
+}
+
+.leftSurahScroller {
+  overflow-y: scroll;
+  bottom: 0;
+  z-index: 6;
+  position: static;
+  height: 100%;
+}
+
+/* settings style start */
+
+#setting-checkbox {
+  display: none;
+}
+
+label i {
+  padding: 8px;
+  cursor: pointer;
+  transition-duration: 0.5s;
+  border-radius: 0px 10px;
+  font-size: 28px;
+}
+
+label i#setting-open {
+  border-radius: 10px;
+}
+label #setting-open {
+  z-index: 11;
+  display: block;
+  visibility: visible;
+}
+label #setting-close {
+  transition-duration: 0.9s;
+  z-index: 999;
+  display: none;
+  top: 0;
+  right: 0;
+  margin-top: 12px;
+  margin-right: 25px;
+  visibility: hidden;
+}
+
+#setting-checkbox:checked ~ label #setting-open {
+  z-index: 11;
+  visibility: hidden;
+}
+
+#setting-checkbox:checked ~ label #setting-close {
+  position: fixed;
+  display: block;
+  visibility: visible;
+}
+
+#setting-checkbox:checked ~ .right-sidebar {
+  right: 0;
+}
+
+
+
+/* settings style end */
+
+/* surah list style start */
+
+#surahs-checkbox {
+  display: none;
+}
+
+label #surahs-open {
+  z-index: 11;
+  align-items: center;
+  padding-right: 10px;
+}
+
+label #surahs-close {
+  transition-duration: 0.9s;
+  z-index: 999;
+  display: none;
+  top: 0;
+  left: 0;
+  margin-top: 12px;
+  margin-left: 25px;
+  visibility: hidden;
+}
+
+#surahs-checkbox:checked ~ label #surahs-open {
+  z-index: 11;
+  visibility: hidden;
+}
+
+#surahs-checkbox:checked ~ label #surahs-close {
+  position: fixed;
+  display: block;
+  visibility: visible;
+}
+
+#surahs-checkbox:checked ~ .left-sidebar {
+  left: 0;
+}
+.right {
+  align-items: flex-end;
+}
+
+/* surah list style end  */
+
+/* for theme */
+
+.forTheme {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+
+.forTheme::-webkit-scrollbar {
+  border-radius: 20px;
+  margin-top: 20px;
+  height: 10px;
+  width: 50% !important;
+}
+
+/* Track */
+.forTheme::-webkit-scrollbar-track {
+  border-radius: 20px;
+}
+
+/* Handle */
+.forTheme::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+
+.themeItem {
+  min-height: 100px;
+  margin-right: 20px;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: 10px;
+}
+.items {
+  cursor: pointer;
+}
+
+/* left sidebar items start */
+
+.surah-wrapper {
+  margin: 15px 10px;
+  border-radius: 10px;
+  position: relative;
+  padding: 17px 0px;
+}
+
+.surah-count {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 14px;
+  position: absolute;
+  top: 23px;
+  left: 10px;
+}
+
+.surah-wrapper h4 {
+  font-size: 22px;
+  margin-top: -5px;
+  margin-left: 50px;
+}
+
+.surah-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.surah-wrapper p {
+  margin-left: 50px;
+  margin-top: -5px;
+}
+
+.surah-wrapper h3 {
+  padding-right: 10px;
+  margin-top: 1px;
+}
+
+#surahs-open h4 {
+  font-weight: bold;
+}
+
+#surahs-open p {
+  margin-top: -5px;
+}
+.hide-me {
+  visibility: hidden;
+  display: none;
+}
+.show-me {
+  visibility: visible;
+  display: flex;
+}
+.half-round {
+  border-radius: 5px;
+  padding: 2px 5px;
+}
+.singleSurahNameWrap {
+  cursor: pointer;
+}
+
+#leftSidebarSurahList {
+  padding: 8px;
+}
+
+/* left sidebar items end */
+
+/* ayah start  */
+
+.ayah {
+  border-bottom: 1px solid grey;
+}
+
+.flex-ayah-icon {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  padding: 20px;
+}
+.first {
+  display: flex;
+  cursor: pointer;
+}
+
+.first div {
+  margin: 0px 10px;
+}
+
+.play-icon i {
+  font-size: 28px;
+}
+.last {
+  cursor: pointer;
+}
+
+.ayah-content {
+  font-size: 18px;
+}
+
+.ayah-content .arabic-ayah {
+  text-align: right !important;
+  font-size: 25px;
+}
+
+.half-round {
+  border-radius: 5px;
+  padding: 2px 5px;
+}
+/* ayah end  */
