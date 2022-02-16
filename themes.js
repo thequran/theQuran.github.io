@@ -5,8 +5,6 @@ const themes = [
         'content': '#195f70',
         'text': 'rgb(255, 255, 255)',
         'text-2': 'rgb(122, 218, 235)'
-        
-
      }, 
     {
         'name': 'dark-orange',
@@ -34,21 +32,11 @@ const themes = [
 
 
 const defaultTheme = {
+    'name': 'dark-blue',
     'bg': 'rgb(1, 39, 62)',
     'content': '#195f70',
     'text': 'rgb(255, 255, 255)',
     'text-2': 'rgb(122, 218, 235)'
-
 };//don't change this, otherwise app won't work;
 
 
-let usersTheme;
-let mainTheme;
-
-
-if (usersTheme == null) {
-    usersTheme = defaultTheme;
-}
-if (mainTheme == null) {
-    mainTheme = usersTheme;
-}

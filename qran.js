@@ -13,13 +13,37 @@ const contextMenuSurahCount = document.getElementById('ctx-surah-count');
 const contextMenuAyahCount = document.getElementById('ctx-ayah-count');
 
 let surahJsonArray = "";
-let selectedTranscript = 'indopak';
 let currentSurah = '';
 let currentIndex;
 let indexes = [];
-let showTajweed = true;
+let mainTheme;
 let currentSurahItemJson = {};
 let currentSelectedSurahButton = '';
+
+//settings to save with cookies and get with cookies...
+
+let arabicFontSize = '26px';
+let arabicFontStyle = 'normal';
+let arabicFontWeight = 'normal';
+let arabicFontFace = 'noorehidayat';
+let showTajweed = true;
+let selectedTranscript = 'indopak';
+let usersTheme = {
+  'name': 'dark-orange',
+  'bg': 'rgb(82, 37, 16)',
+  'content': 'rgb(192, 73, 29)',
+  'text': 'rgb(255, 255, 255)',
+  'text-2': 'rgb(241, 188, 127)'
+};
+
+
+
+// if (usersTheme == null) {
+//   usersTheme = defaultTheme;
+// }
+// if (mainTheme == null) {
+//   mainTheme = usersTheme;
+// }
 
 //setLoadingInUI();
 

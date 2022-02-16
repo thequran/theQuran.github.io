@@ -48,6 +48,7 @@ function loadSurahListCenter() {
         </div>`;
         }
         quranList.innerHTML = innerCode;
+        loadSurahsIndexClickListener(indexes, selectedTranscript);
     }
 
 
@@ -301,7 +302,7 @@ function loadSettingsListener() {
         loadSurahListCenter();
     });
 
-    
+
 
 
 
@@ -316,9 +317,13 @@ function initDefaultSettings() {
 }
 
 function loadArabicSettings() {
+    //set tajweed setting
     var radioButton = document.getElementById('radio-' + selectedTranscript);
     radioButton.checked = true;
     tajweedCheckbox.checked = showTajweed;
+
+    //set font face
+    document.documentElement.style.setProperty("--arabic-font", arabicFontFace);
 
 
 
@@ -382,6 +387,13 @@ function mouseY(evt) {
 }
 
 function loadMainTheme() {
+
+    if (usersTheme == null) {
+        usersTheme = defaultTheme;
+    }
+    if (mainTheme == null) {
+        mainTheme = usersTheme;
+    }
 
     document.documentElement.style.setProperty("--main-bg", mainTheme['bg']);
     document.documentElement.style.setProperty("--main-content", mainTheme['content']);
