@@ -4,7 +4,6 @@ function loadSurahListCenter() {
 
     if (currentSelectedSurahButton != '') {
         loadCurrentSurah();
-
     } else {
         for (var i = 0; i < surahJsonArray.length; i++) {
             const surah = surahJsonArray[i];
@@ -20,8 +19,7 @@ function loadSurahListCenter() {
 
             // innerCode = innerCode+ `<div class=\"col-lg-4 col-sm-12 col-md-6 items\"><div class=\"items-wrapper"><div class="inner-item"><img src="../eFortsHub.ico" alt=""><h4>`+title+`</h4> <p>`+'subtitle'+`</p> <h3>`+titleAr+`</h3></div></div></div>`;
 
-            innerCode =
-                innerCode +
+            innerCode +=
                 `<div id="sura` + index + `" class="col-lg-4 col-12 col-md-6 items">
             <div class="items-wrapper main-content">
                 <div class="inner-item">
@@ -75,7 +73,7 @@ function loadLeftSurahList() {
 
 
 
-        leftSurahItem = leftSurahItem + `<div id="sura` + index + `" class="items items-wrapper main-content">
+        leftSurahItem += `<div id="sura` + index + `" class="items items-wrapper main-content">
                 <div class="inner-item">
                     <div class="title-wrapper ra">
                         <div class="">
@@ -224,7 +222,7 @@ function loadCurrentSurah(keepSettigsWindow) {
         }
 
 
-        surahInnerCode = surahInnerCode +
+        surahInnerCode +=
             `
                                 <div id="`+ id + `" class="ayah  container">
                                     <div class="flex-ayah-icon">
