@@ -47,6 +47,10 @@ function loadSurahListCenter() {
             </div>
         </div>`;
         }
+
+        innerCode += `<div style="height:200px;display:flex;">
+                                </div>
+                            `;
         quranList.innerHTML = innerCode;
         loadSurahsIndexClickListener(indexes, selectedTranscript);
     }
@@ -96,6 +100,10 @@ function loadLeftSurahList() {
 
 
     }
+
+    leftSurahItem += `<div style="height:200px;display:flex;">
+                                </div>
+                            `;
     leftSurahList.innerHTML = leftSurahItem;
 
     if (currentSelectedSurahButton != '') {
@@ -247,6 +255,10 @@ function loadCurrentSurah(keepSettigsWindow) {
                                 </div>
                             `;
     });
+
+    surahInnerCode += `<div style="height:200px;display:flex;">
+                                </div>
+                            `;
 
     quranList.innerHTML = surahInnerCode;
 
