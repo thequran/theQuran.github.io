@@ -5,7 +5,6 @@
 @font-face {
   font-family: al_qalam_quran_majed;
   src: url("fonts/arabic/al_qalam_quran_majed.ttf");
-  
 }
 @font-face {
   font-family: ar_othmani;
@@ -38,11 +37,10 @@ html {
   --main-text: white;
   --main-text-2: rgb(122, 218, 235);
 
-  --arabic-font: kitab;
-  --arabic-font-size: 20px;
+  --arabic-font: noorehidayat;
+  --arabic-font-size: 26px;
   --arabic-font-style: normal;
   --arabic-font-weight: normal;
-
 }
 
 .arabic {
@@ -51,8 +49,6 @@ html {
   font-weight: var(--arabic-font-weight);
   font-style: var(--arabic-font-style);
   direction: rtl;
-
-
 }
 
 .main-bg {

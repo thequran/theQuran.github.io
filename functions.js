@@ -48,7 +48,7 @@ function loadSurahListCenter() {
 
 }
 
-function loadLeftSurahList(button) {
+function loadLeftSurahList() {
 
     var leftSurahItem = "";
 
@@ -94,11 +94,12 @@ function loadLeftSurahList(button) {
     }
     leftSurahList.innerHTML = leftSurahItem;
 
+    if (currentSelectedSurahButton != '') {
+        const button = currentSelectedSurahButton;
+        document.getElementById(button).style.backgroundColor = `var(--main-bg)`;
+        document.getElementById(button).style.border = `1px solid var(--main-content)`;
 
-    document.getElementById(button).style.backgroundColor = `var(--main-bg)`;
-
-    document.getElementById(button).style.border = `1px solid var(--main-content)`;
-
+    }
 
 
 
@@ -165,24 +166,51 @@ function loadSurahsIndexClickListener(indexes, selectedTranscript) {
                 fetch('./api/surah/' + selectedTranscript + '/' + index + '.json')
                     .then((response) => response.json())
                     .then((data) => {
+                        currentSurahItemJson = data;
+                        currentSelectedSurahButton = button;
+                        loadCurrentSurah();
+                    })
+            })
 
-                        const sura = data.surah;
-                        const content = data.verses;
 
-                        let surahInnerCode = '';
-                        content.forEach(element => {
-
-                            const id = element.id;
-                            const verse_key = element.verse_key;
-                            const verse = verse_key.replace(sura + ':', '');
-                            let text = element.text;
+    }
 
 
 
-                            text = getTajweedFilteredText(text);
+}
 
-                            surahInnerCode = surahInnerCode +
-                                `
+// const loader = document.querySelector(".loader-bg");
+
+// window.addEventListener("load", function(){
+//     setTimeout(() => {
+//       loader.style.display = "none"
+//     }, 1000);
+//   })
+
+
+
+
+function loadCurrentSurah() {
+    const data = currentSurahItemJson;
+    const sura = data.surah;
+    const content = data.verses;
+
+    let surahInnerCode = '';
+    content.forEach(element => {
+
+        const id = element.id;
+        const verse_key = element.verse_key;
+        const verse = verse_key.replace(sura + ':', '');
+        let text = element.text;
+
+
+        if (showTajweed) {
+            text = getTajweedFilteredText(text);
+        }
+
+
+        surahInnerCode = surahInnerCode +
+            `
                                 <div id="`+ id + `" class="ayah  container">
                                     <div class="flex-ayah-icon">
                                         <div class="first ">
@@ -211,58 +239,38 @@ function loadSurahsIndexClickListener(indexes, selectedTranscript) {
                                     </div>  
                                 </div>
                             `;
-                        });
+    });
 
-                        quranList.innerHTML = surahInnerCode;
-
-
-                        currentIndex = sura;
-                        currentSurah = surahJsonArray[sura - 1];
-
-                        var singleSurahTitle = document.getElementById('single_surah_title');
-                        var singleSurahTranslt = document.getElementById('signleSurahTr');
-
-                        var leftSurahListpen = document.getElementById('surahs-open');
-
-                        leftSurahListpen.classList.remove('hide-me');
-                        leftSurahListpen.classList.add('show-me')
-
-                        singleSurahTitle.innerHTML = currentSurah['title'];
-                        singleSurahTranslt.innerHTML = currentIndex;
-
-                        surahCheckBox.checked = false;
-                        settingsCheckBox.checked = false;
+    quranList.innerHTML = surahInnerCode;
 
 
-                        loadLeftSurahList(button);
-                        loadSurahsIndexClickListener(indexes, selectedTranscript);
-                        hideLoadingInUI();
-                        loadRightClickContextMenu(sura, content);
+    currentIndex = sura;
+    currentSurah = surahJsonArray[sura - 1];
+
+    var singleSurahTitle = document.getElementById('single_surah_title');
+    var singleSurahTranslt = document.getElementById('signleSurahTr');
+
+    var leftSurahListpen = document.getElementById('surahs-open');
+
+    leftSurahListpen.classList.remove('hide-me');
+    leftSurahListpen.classList.add('show-me')
+
+    singleSurahTitle.innerHTML = currentSurah['title'];
+    singleSurahTranslt.innerHTML = currentIndex;
+
+    surahCheckBox.checked = false;
+    settingsCheckBox.checked = false;
 
 
+    //todo: 
 
-                    })
-
-            })
-
-
-    }
-
+    loadLeftSurahList();
+    loadSurahsIndexClickListener(indexes, selectedTranscript);
+    hideLoadingInUI();
+    loadRightClickContextMenu(sura, content);
 
 
 }
-
-// const loader = document.querySelector(".loader-bg");
-
-// window.addEventListener("load", function(){
-//     setTimeout(() => {
-//       loader.style.display = "none"
-//     }, 1000);
-//   })
-
-
-
-
 
 function setLoadingInUI() {
     document.getElementById("ayah-context-menu").style.visibility = 'hidden';
@@ -277,9 +285,30 @@ function hideLoadingInUI() {
     var loader = document.getElementById("loader-bg");
     loader.style.visibility = 'hidden';
 }
+function loadSettingsListener() {
+    tajweedCheckbox.addEventListener('change', function () {
+        showTajweed = this.checked;
+        console.log(this.checked);
+        initDefaultSettings();
+        loadSurahListCenter();
+    });
+
+}
 
 function initDefaultSettings() {
     loadMainTheme();
+    loadArabicSettings();
+
+
+
+}
+
+function loadArabicSettings() {
+    var radioButton = document.getElementById('radio-' + selectedTranscript);
+    radioButton.checked = true;
+    tajweedCheckbox.checked = showTajweed;
+
+
 
 }
 

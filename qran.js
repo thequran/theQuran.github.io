@@ -4,16 +4,22 @@ const leftSurahList = document.querySelector("#leftSidebarSurahList");
 
 const surahCheckBox = document.getElementById('surahs-checkbox');
 const settingsCheckBox = document.getElementById('setting-checkbox');
+const tajweedCheckbox = document.getElementById('tajweed-checkbox');
+
+
 
 const contextMenuSurahCount = document.getElementById('ctx-surah-count');
 
 const contextMenuAyahCount = document.getElementById('ctx-ayah-count');
 
 let surahJsonArray = "";
-let selectedTranscript = 'imlaei';
+let selectedTranscript = 'indopak';
 let currentSurah = '';
 let currentIndex;
 let indexes = [];
+let showTajweed = true;
+let currentSurahItemJson = {};
+let currentSelectedSurahButton = '';
 
 //setLoadingInUI();
 
@@ -23,14 +29,17 @@ let indexes = [];
 
 
 loadThemeSettings();
+
 fetch("./api/surah.json")
   .then((response) => response.json())
   .then((data) => {
     surahJsonArray = data;
     loadSurahListCenter();
     loadSurahsIndexClickListener(indexes, selectedTranscript);
+    loadSettingsListener();
     initDefaultSettings();
     hideLoadingInUI();
+
   });
 
 
