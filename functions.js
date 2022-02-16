@@ -2,49 +2,54 @@
 function loadSurahListCenter() {
     var innerCode = "";
 
+    if (currentSelectedSurahButton != '') {
+        loadCurrentSurah();
 
-    for (var i = 0; i < surahJsonArray.length; i++) {
-        const surah = surahJsonArray[i];
-        const place = surah["place"];
-        const type = surah["type"];
-        const ayahCount = surah["count"];
-        const title = surah["title"];
-        const titleAr = surah["titleAr"];
-        const pages = surah["pages"];
-        const index = surah["index"];
+    } else {
+        for (var i = 0; i < surahJsonArray.length; i++) {
+            const surah = surahJsonArray[i];
+            const place = surah["place"];
+            const type = surah["type"];
+            const ayahCount = surah["count"];
+            const title = surah["title"];
+            const titleAr = surah["titleAr"];
+            const pages = surah["pages"];
+            const index = surah["index"];
 
-        indexes.push(index);
+            indexes.push(index);
 
-        // innerCode = innerCode+ `<div class=\"col-lg-4 col-sm-12 col-md-6 items\"><div class=\"items-wrapper"><div class="inner-item"><img src="../eFortsHub.ico" alt=""><h4>`+title+`</h4> <p>`+'subtitle'+`</p> <h3>`+titleAr+`</h3></div></div></div>`;
+            // innerCode = innerCode+ `<div class=\"col-lg-4 col-sm-12 col-md-6 items\"><div class=\"items-wrapper"><div class="inner-item"><img src="../eFortsHub.ico" alt=""><h4>`+title+`</h4> <p>`+'subtitle'+`</p> <h3>`+titleAr+`</h3></div></div></div>`;
 
-        innerCode =
-            innerCode +
-            `<div id="sura` + index + `" class="col-lg-4 col-12 col-md-6 items">
+            innerCode =
+                innerCode +
+                `<div id="sura` + index + `" class="col-lg-4 col-12 col-md-6 items">
             <div class="items-wrapper main-content">
                 <div class="inner-item">
                     <div class="title-wrapper ra">
                         <div class="">
                             <h2  class="round main-bg main-text">` +
-            (i + 1) +
-            `</h2>
+                (i + 1) +
+                `</h2>
                         </div>
                         <div>
                             <h4 class="main-text">` +
-            title +
-            `</h4>
+                title +
+                `</h4>
                             <p class="main-text">` +
-            place +
-            `</p>
+                place +
+                `</p>
                         </div>
                     </div>
                     <h3 class="main-text-2 arabic">` +
-            titleAr +
-            `</h3>
+                titleAr +
+                `</h3>
                 </div>
             </div>
         </div>`;
+        }
+        quranList.innerHTML = innerCode;
     }
-    quranList.innerHTML = innerCode;
+
 
 }
 
@@ -61,7 +66,7 @@ function loadLeftSurahList() {
         const titleAr = surah["titleAr"];
         const pages = surah["pages"];
         const index = surah["index"];
-        console.log(title);
+        //console.log(title);
 
 
 
@@ -191,6 +196,9 @@ function loadSurahsIndexClickListener(indexes, selectedTranscript) {
 
 
 function loadCurrentSurah() {
+
+    console.log('loading current surah');
+
     const data = currentSurahItemJson;
     const sura = data.surah;
     const content = data.verses;
@@ -292,6 +300,10 @@ function loadSettingsListener() {
         initDefaultSettings();
         loadSurahListCenter();
     });
+
+    
+
+
 
 }
 
