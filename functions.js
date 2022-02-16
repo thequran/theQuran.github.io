@@ -71,9 +71,7 @@ function loadLeftSurahList() {
 
 
 
-        leftSurahItem =
-            leftSurahItem +
-            `<div id="sura` + index + `" class="items items-wrapper main-content">
+        leftSurahItem = leftSurahItem + `<div id="sura` + index + `" class="items items-wrapper main-content">
                 <div class="inner-item">
                     <div class="title-wrapper ra">
                         <div class="">
@@ -196,7 +194,7 @@ function loadSurahsIndexClickListener(indexes, selectedTranscript) {
 
 
 
-function loadCurrentSurah() {
+function loadCurrentSurah(keepSettigsWindow) {
 
     console.log('loading current surah');
 
@@ -268,7 +266,12 @@ function loadCurrentSurah() {
     singleSurahTranslt.innerHTML = currentIndex;
 
     surahCheckBox.checked = false;
-    settingsCheckBox.checked = false;
+
+
+    if (keepSettigsWindow == null) {
+
+        settingsCheckBox.checked = false;
+    }
 
 
     //todo: 
@@ -324,6 +327,11 @@ function loadArabicSettings() {
 
     //set font face
     document.documentElement.style.setProperty("--arabic-font", arabicFontFace);
+
+    document.documentElement.style.setProperty("--arabic-font-size", arabicFontSize);
+    document.documentElement.style.setProperty("--arabic-font-style", arabicFontStyle);
+    document.documentElement.style.setProperty("--arabic-font-weight", arabicFontWeight);
+
 
 
 

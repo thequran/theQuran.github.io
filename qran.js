@@ -12,6 +12,7 @@ const contextMenuSurahCount = document.getElementById('ctx-surah-count');
 
 const contextMenuAyahCount = document.getElementById('ctx-ayah-count');
 
+//setings that will update on time
 let surahJsonArray = "";
 let currentSurah = '';
 let currentIndex;
@@ -22,7 +23,7 @@ let currentSelectedSurahButton = '';
 
 //settings to save with cookies and get with cookies...
 
-let arabicFontSize = '26px';
+let arabicFontSize = '24px';
 let arabicFontStyle = 'normal';
 let arabicFontWeight = 'normal';
 let arabicFontFace = 'noorehidayat';
