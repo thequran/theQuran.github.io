@@ -1,5 +1,6 @@
 
 function loadSurahListCenter() {
+    
     var innerCode = "";
 
     if (currentSelectedSurahButton != '') {
