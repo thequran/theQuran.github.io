@@ -38,7 +38,7 @@ function loadSurahListCenter() {
                 `</p>
                         </div>
                     </div>
-                    <h3 class="main-text-2 arabic">` +
+                    <h3 class="main-text-2 arabic" dir="rtl">` +
                 titleAr +
                 `</h3>
                 </div>
@@ -90,7 +90,7 @@ function loadLeftSurahList() {
             `</p>
                         </div>
                     </div>
-                    <h3 class="main-text-2 arabic">` +
+                    <h3 class="main-text-2 arabic" dir="rtl">` +
             titleAr +
             `</h3>
                 </div>
@@ -242,7 +242,7 @@ function loadCurrentSurah(keepSettigsWindow) {
                                     </div>    
                                     <div class="ayah-content">
                                         <div class="arabic-ayah" >
-                                            <font class="main-text arabic">`+ text + `</font>
+                                            <font class="main-text arabic" dir="rtl">`+ text + `</font>
                                         </div>
                                             <br>   
                                         <font class="main-text">No translation available</font>

@@ -47,7 +47,6 @@ html {
   font-size: var(--arabic-font-size);
   font-weight: var(--arabic-font-weight);
   font-style: var(--arabic-font-style);
-  direction: rtl;
 }
 
 .main-bg {
